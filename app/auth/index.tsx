@@ -1,6 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const AuthScreen = () => {
