@@ -4,6 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import EmailInput from "@/components/EmailInput";
 import PasswordInput from "@/components/PasswordInput";
 import PasswordConfirmInput from "@/components/PasswordConfirmInput";
+import useAuth from "@/hooks/queries/useAuth";
 
 type FormValues = {
   email: string;
@@ -12,6 +13,7 @@ type FormValues = {
 };
 
 const SignupScreen = () => {
+  const { signupMutation } = useAuth();
   const signupForm = useForm<FormValues>({
     defaultValues: {
       email: "",
@@ -21,8 +23,14 @@ const SignupScreen = () => {
   });
 
   const onSubmit = (formValues: FormValues) => {
-    console.log("formValues", formValues);
+    console.log("🚀 회원가입 시도:", formValues.email);
+    const { email, password } = formValues;
+    signupMutation.mutate({ email, password });
   };
+
+  const handlePress = signupForm.handleSubmit(onSubmit, (errors) => {
+    console.log("❌ Validation 에러:", errors);
+  });
 
   return (
     <FormProvider {...signupForm}>
@@ -31,7 +39,7 @@ const SignupScreen = () => {
         <PasswordInput submitBehavior="submit" />
         <PasswordConfirmInput />
       </View>
-      <FixedBottomCTA label="회원가입하기" onPress={signupForm.handleSubmit(onSubmit)} />
+      <FixedBottomCTA label="회원가입하기" onPress={handlePress} />
     </FormProvider>
   );
 };
