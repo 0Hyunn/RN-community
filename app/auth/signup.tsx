@@ -23,14 +23,11 @@ const SignupScreen = () => {
   });
 
   const onSubmit = (formValues: FormValues) => {
-    console.log("🚀 회원가입 시도:", formValues.email);
     const { email, password } = formValues;
     signupMutation.mutate({ email, password });
   };
 
-  const handlePress = signupForm.handleSubmit(onSubmit, (errors) => {
-    console.log("❌ Validation 에러:", errors);
-  });
+  const handlePress = signupForm.handleSubmit(onSubmit, (errors) => {});
 
   return (
     <FormProvider {...signupForm}>
