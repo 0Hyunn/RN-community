@@ -35,7 +35,6 @@ export default function RootLayout() {
 const RootNavigator = () => {
   const { auth } = useAuth();
 
-  console.log("auth", auth);
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
