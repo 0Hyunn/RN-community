@@ -6,6 +6,7 @@ import "react-native-reanimated";
 import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "@/api/queryClient";
 import useAuth from "@/hooks/queries/useAuth";
+import Toast from "react-native-toast-message";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,12 +29,23 @@ export default function RootLayout() {
     // QueryClientProvider로 감싸줘야 함
     <QueryClientProvider client={queryClient}>
       <RootNavigator />
+      <Toast />
     </QueryClientProvider>
   );
 }
 
 const RootNavigator = () => {
   const { auth } = useAuth();
+
+  useEffect(() => {
+    auth.id &&
+      Toast.show({
+        type: "success",
+        text1: `${auth.nickname ?? "회원"}님 환영합니다!`,
+        text2: "메시지",
+        position: "bottom",
+      });
+  }, [auth.id]);
 
   return (
     <Stack>
