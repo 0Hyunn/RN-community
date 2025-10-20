@@ -12,4 +12,11 @@ const colors = {
   BLACK: "#000",
 };
 
-export { colors };
+const queryKey = {
+  AUTH: "auth",
+  GET_ME: "getMe",
+  POST: "post",
+  GET_POST: "getPosts",
+};
+
+export { colors, queryKey };
