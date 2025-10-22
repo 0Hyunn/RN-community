@@ -1,17 +1,16 @@
-import { createPost } from "@/api/post";
+import { updatePost } from "@/api/post";
 import queryClient from "@/api/queryClient";
 import { queryKey } from "@/constants";
 import { useMutation } from "@tanstack/react-query";
-import { router } from "expo-router";
 
-function useCreatePost() {
+function useUpdatePost() {
   return useMutation({
-    mutationFn: createPost,
-    onSuccess: () => {
-      router.replace("/");
+    mutationFn: updatePost,
+    onSuccess: (postId) => {
+      queryClient.invalidateQueries({ queryKey: [queryKey.POST, queryKey.GET_POST, postId] });
       queryClient.invalidateQueries({ queryKey: [queryKey.POST, queryKey.GET_POSTS] });
     },
   });
 }
 
-export default useCreatePost;
+export default useUpdatePost;

@@ -6,6 +6,8 @@ import { Post } from "@/types";
 import Profile from "./Profile";
 import useAuth from "@/hooks/queries/useAuth";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import useDeletePost from "@/hooks/queries/useDeletePost";
+import { router } from "expo-router";
 
 interface FeedItemProps {
   post: Post;
@@ -16,6 +18,7 @@ function FeedItem({ post }: FeedItemProps) {
   const likeUsers = post.likes?.map((like) => Number(like.userId));
   const isLiked = likeUsers?.includes(Number(auth.id));
   const { showActionSheetWithOptions } = useActionSheet();
+  const deletePost = useDeletePost();
 
   const handlePressOption = () => {
     const options = ["삭제", "수정", "취소"];
@@ -24,11 +27,12 @@ function FeedItem({ post }: FeedItemProps) {
     const cancelButtonIndex = 2;
 
     showActionSheetWithOptions({ options, cancelButtonIndex, destructiveButtonIndex }, (selectedIndex?: number) => {
-      console.log(selectedIndex);
       switch (selectedIndex) {
-        case destructiveButtonIndex: //TODO: 삭제 기능 구현
+        case destructiveButtonIndex:
+          deletePost.mutate(post.id);
           break;
-        case 1: //TODO: 수정 기능 구현
+        case 1:
+          router.push(`/post/update/${post.id}`);
           break;
         case cancelButtonIndex: //TODO: 취소 기능 구현
           break;

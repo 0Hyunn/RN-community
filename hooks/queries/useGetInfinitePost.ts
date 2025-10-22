@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 function useGetInfinitePosts() {
   return useInfiniteQuery({
     queryFn: ({ pageParam }) => getPosts(pageParam),
-    queryKey: [queryKey.POST, queryKey.GET_POST],
+    queryKey: [queryKey.POST, queryKey.GET_POSTS],
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const lastPost = lastPage[lastPage.length - 1];

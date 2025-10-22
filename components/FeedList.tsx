@@ -21,7 +21,7 @@ function FeedList() {
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await queryClient.invalidateQueries({ queryKey: [queryKey.POST, queryKey.GET_POST] });
+    await queryClient.invalidateQueries({ queryKey: [queryKey.POST, queryKey.GET_POSTS] });
     setIsRefreshing(false);
   };
 
