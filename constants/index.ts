@@ -1,5 +1,5 @@
 const colors = {
-  WHITE: "#FFF",
+  WHITE: "#FFFFFF",
   RED_100: "#FFDFDF",
   RED_500: "#FF5F5F",
   ORANGE_600: "#FF6B57",
@@ -9,7 +9,7 @@ const colors = {
   GRAY_500: "#6B7280",
   GRAY_600: "#4B5563",
   GRAY_700: "#374151",
-  BLACK: "#000",
+  BLACK: "#000000",
 };
 
 const queryKey = {
